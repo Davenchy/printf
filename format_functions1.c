@@ -5,8 +5,9 @@
  * @ap: pointer to the variadic list
  * Return: number of characters had been written
  */
-int case_c(va_list ap) {
-    return pchar(va_arg(ap, int));
+int case_c(va_list ap)
+{
+	return (pchar(va_arg(ap, int)));
 }
 
 /**
@@ -16,11 +17,13 @@ int case_c(va_list ap) {
  * if the string argument equals to NULL then prints "(null)"
  * Return: number of characters had been written
  */
-int case_s(va_list ap) {
-    char *str = va_arg(ap, char *);
-    if (!str)
-        return pstr("(null)");
-    return pstr(str);
+int case_s(va_list ap)
+{
+	char *str = va_arg(ap, char *);
+
+	if (!str)
+		return (pstr("(null)"));
+	return (pstr(str));
 }
 
 /**
@@ -28,6 +31,7 @@ int case_s(va_list ap) {
  * @ap: pointer to the variadic list
  * Return: number of characters had been written
  */
-int case_mod(va_list ap __attribute__((unused))) {
-    return pchar('%');
+int case_mod(va_list ap __attribute__((unused)))
+{
+	return (pchar('%'));
 }

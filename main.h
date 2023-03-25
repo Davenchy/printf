@@ -11,9 +11,10 @@ void strrev(char *str, int len);
 
 /* type definitions */
 typedef int (*format_f)(va_list);
-typedef struct {
-    char fcase;
-    format_f fun;
+typedef struct
+{
+	char fcase;
+	format_f fun;
 } format_s;
 
 /* format functions */
