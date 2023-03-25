@@ -12,6 +12,7 @@ int _printf(const char *format, ...) {
     /* array of format cases and their handling functions */
     format_s formats[] = {
         { 'c', case_c }, { 's', case_s }, { '%', case_mod },
+        { 'i', case_num }, { 'd', case_num },
         { 0, (void *)0 },
     };
     

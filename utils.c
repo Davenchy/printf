@@ -20,3 +20,15 @@ int pstr(const char *str) {
         i += pchar(*str++);
     return i;
 }
+
+/**
+ * strrev - reverse array of characters of length @len
+ * @str: reference to the characters array
+ * @len: the size of the array
+ */
+void strrev(char *str, int len) {
+    char *ptr;
+    for (ptr = str + len; str < ptr; str++, ptr--)
+        /* swap *str with *ptr */
+        *str ^= *ptr, *ptr ^= *str, *str ^= *ptr;
+}

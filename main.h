@@ -7,6 +7,7 @@
 int _printf(const char *format, ...);
 int pchar(const char c);
 int pstr(const char *str);
+void strrev(char *str, int len);
 
 /* type definitions */
 typedef int (*format_f)(va_list);
@@ -19,5 +20,6 @@ typedef struct {
 int case_c(va_list ap);
 int case_s(va_list ap);
 int case_mod(va_list ap);
+int case_num(va_list ap);
 
 #endif
