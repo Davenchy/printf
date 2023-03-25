@@ -17,6 +17,8 @@ int _printf(const char *format, ...)
 		{ 0, (void *)0 },
 	};
 
+	if (!format)
+		return (-1);
 	va_start(ap, format);
 	for (; *format; format++)
 	{
