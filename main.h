@@ -4,7 +4,7 @@
 #include <stdarg.h>
 
 /* main functions */
-int _printf(const char *format, ...);
+int _printf(const char *format, ...) __attribute__((format(printf, 1, 2)));
 int pchar(const char c);
 int pstr(const char *str);
 void strrev(char *str, int len);
