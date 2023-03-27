@@ -10,6 +10,9 @@ int case_address(va_list ap)
 	unsigned long value = va_arg(ap, unsigned long);
 	char str[19];
 
+	if (!value)
+		return pstr("(nil)");
+
 	str[0] = '0';
 	str[1] = 'x';
 	if (!number_converter(str + 2, value, 16))
