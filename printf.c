@@ -16,7 +16,7 @@ int _printf(const char *format, ...)
 		{ 'd', case_dec }, { 'i', case_dec }, { 'r', case_rs },
 		{ 'u', case_unsigned }, { 'o', case_octal }, { 'b', case_bin },
 		{ 'x', case_lower_hex }, { 'X', case_upper_hex }, {'p', case_address },
-		{ 0, NULL }
+		{ 0, (void *)0 }
 	};
 
 	if (!format)

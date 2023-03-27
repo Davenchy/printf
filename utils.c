@@ -37,7 +37,7 @@ void strrev(char *str, int len)
 {
 	char *ptr;
 
-	for (ptr = str + len; str < ptr; str++, ptr--)
+	for (ptr = str + len - 1; str < ptr; str++, ptr--)
 		/* swap *str with *ptr */
 		*str ^= *ptr, *ptr ^= *str, *str ^= *ptr;
 }
