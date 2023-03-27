@@ -13,8 +13,10 @@ int _printf(const char *format, ...)
 	/* array of format cases and their handling functions */
 	format_s formats[] = {
 		{ 'c', case_c }, { 's', case_s }, { '%', case_mod },
-		{ 'i', case_num }, { 'd', case_num },
-		{ 0, (void *)0 },
+		{ 'd', case_dec }, { 'i', case_dec }, { 'r', case_rs },
+		{ 'u', case_unsigned }, { 'o', case_octal }, { 'b', case_bin },
+		{ 'x', case_lower_hex }, { 'X', case_upper_hex }, {'p', case_address },
+		{ 0, NULL }
 	};
 
 	if (!format)
