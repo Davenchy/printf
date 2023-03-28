@@ -1,6 +1,7 @@
 #include "main.h"
 #include <ctype.h>
 #include <stdarg.h>
+#include <string.h>
 
 /**
  * case_address - function to handle pointer address format
@@ -69,17 +70,25 @@ int case_S(va_list ap)
 
                 str_2[0] = '\\';
                 str_2[1] = 'x';
-                str_2[2] = '0';
 
                 if (isprint(*str))
                 {
                         counter += pchar(*str);
                         continue;
                 }
-                number_converter(str_2 + 3, *str, 16);
+                number_converter(str_2 + 2, *str, 16);
+
+                if (strlen(str_2) == 3)
+                {
+                        str_2[3] = toupper(str_2[2]);
+                        str_2[2] = '0';
+                        counter += pstr(str_2);
+                        continue;
+                }
+                str_2[2] = toupper(str_2[2]);
                 str_2[3] = toupper(str_2[3]);
-                str_2[4] = toupper(str_2[4]);
                 counter += pstr(str_2);
+                continue;
         }
         return (counter);
 }
