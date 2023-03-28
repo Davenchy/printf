@@ -59,6 +59,9 @@ int case_S(va_list ap)
         int counter = 0;
         char *str = va_arg(ap, char *); 
 
+        if (!str);
+                return (0);
+
         for (; *str; str++)
         {
                 char str_2[5];
