@@ -1,5 +1,6 @@
 #include <ctype.h>
 #include "main.h"
+#include <string.h>
 
 /**
  * case_address - function to handle pointer address format
@@ -67,10 +68,20 @@ void case_S(context_t *ctx)
 		/* print byte in hexdec form */
 		str_2[0] = '\\';
 		str_2[1] = 'x';
-		str_2[2] = '0';
-		number_converter(str_2 + 3, *str, 16); /* convert byte into hexdec*/
-		str_2[3] = toupper(str_2[3]);
-		str_2[4] = toupper(str_2[4]);
-		pstr(ctx, str_2);
+
+		number_converter(str_2 + 2, *str, 16); /* convert byte into hexdec*/
+
+		if (strlen(str_2) == 3)
+		{
+			str_2[3] = toupper(str_2[2]);
+			str_2[2] = toupper('0');
+			pstr(ctx, str_2);
+		}
+		else 
+		{
+			str_2[2] = toupper(str_2[2]);
+			str_2[3] = toupper(str_2[3]);
+			pstr(ctx, str_2);
+		}
 	}
 }
