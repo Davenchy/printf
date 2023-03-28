@@ -38,17 +38,17 @@ int case_R13(va_list ap)
         for(; *str; str++)
         {
                 if ( *str >= 65 && *str <= 90)
-        {
-                counter += pchar(((90 - *str) >= 13) ? *str + 13 : *str - 13);
-                continue;
-        }
+                {
+                        counter += pchar(((90 - *str) >= 13) ? *str + 13 : *str - 13);
+                        continue;
+                }
 
-        else if ( *str >= 97 && *str <= 122)
-        {
-                counter += pchar(((122 - *str) >= 13) ? *str + 13 : *str - 13);
-                continue;
-        }
-        counter += pchar(*str);
+                else if ( *str >= 97 && *str <= 122)
+                {
+                        counter += pchar(((122 - *str) >= 13) ? *str + 13 : *str - 13);
+                        continue;
+                }
+                counter += pchar(*str);
         }
         return (counter);
 }
@@ -59,7 +59,7 @@ int case_S(va_list ap)
         int counter = 0;
         char *str = va_arg(ap, char *); 
 
-        if (!str);
+        if (!str)
                 return (0);
 
         for (; *str; str++)
