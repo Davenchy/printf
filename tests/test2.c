@@ -1,3 +1,4 @@
+#include <limits.h>
 #include "../main.h"
 
 int main() {
@@ -12,5 +13,7 @@ int main() {
     _printf("length: %d\n", r);
     r = _printf("");
     _printf("length: %d\n", r);
+		_printf("\n");
+		_printf("%d, %d, %i, %i\n", INT_MAX, INT_MIN, INT_MAX, INT_MIN);
     return 0;
 }

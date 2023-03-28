@@ -51,10 +51,11 @@ void case_mod(context_t *ctx)
  */
 void case_dec(context_t *ctx)
 {
-	int sign = 0, value = va_arg(ctx->ap, int);
+	int sign = 0;
+	unsigned int value = va_arg(ctx->ap, unsigned int);
 	char str[12];
 
-	if (value < 0)
+	if ((signed)value < 0)
 	{
 		value = -value;
 		str[sign++] = '-';
