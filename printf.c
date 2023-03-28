@@ -8,10 +8,10 @@
  */
 int _printf(const char *format, ...)
 {
-	int i, counter = 0;
-	va_list ap;
+	int i;
+	context_t ctx;
 	/* array of format cases and their handling functions */
-	format_s formats[] = {
+	format_t formats[] = {
 		{ 'c', case_c }, { 's', case_s }, { '%', case_mod },
 		{ 'd', case_dec }, { 'i', case_dec }, { 'r', case_rs },
 		{ 'u', case_unsigned }, { 'o', case_octal }, { 'b', case_bin },
@@ -21,14 +21,16 @@ int _printf(const char *format, ...)
 
 	if (!format)
 		return (-1);
-	va_start(ap, format);
+	ctx.bp = buffer_start(BUFFER_SIZE);
+	if (!ctx.bp)
+		return (-1);
+	va_start(ctx.ap, format);
 	for (; *format; format++)
 	{
 		/* print ordinary characters */
 		if (*format != '%')
 		{
-			pchar(*format);
-			counter++;
+			pchar(&ctx, *format);
 			continue;
 		}
 
@@ -39,9 +41,9 @@ int _printf(const char *format, ...)
 			/* detect the format case */
 			if (formats[i].fcase == *format)
 				/* execute the format handling function */
-				counter += formats[i].fun(ap);
+				formats[i].fun(&ctx);
 		}
 	}
-	va_end(ap);
-	return (counter);
+	va_end(ctx.ap);
+	return (buffer_end(ctx.bp));
 }

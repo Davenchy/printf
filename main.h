@@ -2,35 +2,40 @@
 #define _MAIN_H_
 
 #include <stdarg.h>
-
-/* main and util functions */
-int _printf(const char *format, ...);
-int pchar(const char c);
-int pstr(const char *str);
-void strrev(char *str, int len);
-int number_converter(char *str, unsigned long value, int base);
+#include "buffer.h"
 
 /* type definitions */
-typedef int (*format_f)(va_list);
+typedef struct context_s
+{
+	buffer_t bp;
+	va_list ap;
+} context_t;
 typedef struct
 {
 	char fcase;
-	format_f fun;
-} format_s;
+	void (*fun)(context_t *ctx);
+} format_t;
+
+/* main and util functions */
+int _printf(const char *format, ...);
+void pchar(context_t *ctx, const char c);
+void pstr(context_t *ctx, const char *str);
+void strrev(char *str, int len);
+int number_converter(char *str, unsigned long value, int base);
 
 /* format functions */
-int case_c(va_list);
-int case_s(va_list);
-int case_rs(va_list);
-int case_mod(va_list);
-int case_dec(va_list);
-int case_bin(va_list);
-int case_unsigned(va_list);
-int case_octal(va_list);
-int case_upper_hex(va_list);
-int case_lower_hex(va_list);
-int case_address(va_list);
-int case_R13(va_list);
-int case_S(va_list);
+void case_c(context_t *ctx);
+void case_s(context_t *ctx);
+void case_rs(context_t *ctx);
+void case_mod(context_t *ctx);
+void case_dec(context_t *ctx);
+void case_bin(context_t *ctx);
+void case_unsigned(context_t *ctx);
+void case_octal(context_t *ctx);
+void case_upper_hex(context_t *ctx);
+void case_lower_hex(context_t *ctx);
+void case_address(context_t *ctx);
+void case_R13(context_t *ctx);
+void case_S(context_t *ctx);
 
 #endif

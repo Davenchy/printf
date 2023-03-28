@@ -3,78 +3,70 @@
 
 /**
  * case_bin - function to handle binary format
- * @ap: pointer to the variadic list
- * Return: number of characters had been printed
+ * @ctx: the printf context object
  */
-int case_bin(va_list ap)
+void case_bin(context_t *ctx)
 {
-	unsigned int value = va_arg(ap, unsigned int);
+	unsigned int value = va_arg(ctx->ap, unsigned int);
 	char str[35];
 
-	if (!number_converter(str, value, 2))
-		return (0);
-	return (pstr(str));
+	if (number_converter(str, value, 2))
+		pstr(ctx, str);
+
 }
 
 /**
  * case_unsigned - function to handle unsigned decimal numbers format
- * @ap: pointer to the variadic list
- * Return: number of characters had been printed
+ * @ctx: the printf context object
  */
-int case_unsigned(va_list ap)
+void case_unsigned(context_t *ctx)
 {
-	unsigned int value = va_arg(ap, unsigned int);
+	unsigned int value = va_arg(ctx->ap, unsigned int);
 	char str[11];
 
-	if (!number_converter(str, value, 10))
-		return (0);
-	return (pstr(str));
+	if (number_converter(str, value, 10))
+		pstr(ctx, str);
 }
 
 /**
  * case_octal - function to handle octal numbers format
- * @ap: pointer to the variadic list
- * Return: number of characters had been printed
+ * @ctx: the printf context object
  */
-int case_octal(va_list ap)
+void case_octal(context_t *ctx)
 {
-	unsigned int value = va_arg(ap, unsigned int);
+	unsigned int value = va_arg(ctx->ap, unsigned int);
 	char str[12];
 
-	if (!number_converter(str, value, 8))
-		return (0);
-	return (pstr(str));
+	if (number_converter(str, value, 8))
+		pstr(ctx, str);
 }
 
 /**
  * case_lower_hex - function to handle lower case hexdec format
- * @ap: pointer to the variadic list
- * Return: number of characters had been printed
+ * @ctx: the printf context object
  */
-int case_lower_hex(va_list ap)
+void case_lower_hex(context_t *ctx)
 {
-	unsigned int value = va_arg(ap, unsigned int);
+	unsigned int value = va_arg(ctx->ap, unsigned int);
 	char str[10];
 
-	if (!number_converter(str, value, 16))
-		return (0);
-	return (pstr(str));
+	if (number_converter(str, value, 16))
+		pstr(ctx, str);
 }
 
 /**
  * case_upper_hex - function to handle uppercase hexdec format
- * @ap: pointer to the variadic list
- * Return: number of characters had been printed
+ * @ctx: the printf context object
  */
-int case_upper_hex(va_list ap)
+void case_upper_hex(context_t *ctx)
 {
-	unsigned int i, value = va_arg(ap, unsigned int);
+	unsigned int i, value = va_arg(ctx->ap, unsigned int);
 	char str[10];
 
-	if (!number_converter(str, value, 16))
-		return (0);
-
-	for (i = 0; str[i]; i++)
-		str[i] = toupper(str[i]);
-	return (pstr(str));
+	if (number_converter(str, value, 16))
+	{
+		for (i = 0; str[i]; i++)
+			str[i] = toupper(str[i]);
+		pstr(ctx, str);
+	}
 }

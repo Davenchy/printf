@@ -1,31 +1,29 @@
 #include <unistd.h>
+#include <string.h>
+#include "main.h"
 
 /**
  * pchar - writes character to stdout
+ * @ctx: the printf context object
  * @c: character to print
- * Return: 1 on success else 0
  */
-int pchar(const char c)
+void pchar(context_t *ctx, const char c)
 {
-	return (write(1, &c, 1) > 0 ? 1 : 0);
+	buffer_write_char(ctx->bp, c);
 }
 
 /**
  * pstr - writes string to stdout
+ * @ctx: the printf context object
  * @str: reference to cstring to print
  * Description:
  * if @str is NULL the prints `(null)`
- * Return: number of characters had been written
  */
-int pstr(const char *str)
+void pstr(context_t *ctx, const char *str)
 {
-	int i = 0;
-
 	if (!str)
 		str = "(null)";
-	while (*str)
-		i += pchar(*str++);
-	return (i);
+	buffer_write(ctx->bp, str, strlen(str));
 }
 
 /**

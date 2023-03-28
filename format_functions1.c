@@ -4,61 +4,54 @@
 
 /**
  * case_c - function to handle char format
- * @ap: pointer to the variadic list
- * Return: number of characters had been written
+ * @ctx: the printf context object
  */
-int case_c(va_list ap)
+void case_c(context_t *ctx)
 {
-	return (pchar(va_arg(ap, int)));
+	pchar(ctx, va_arg(ctx->ap, int));
 }
 
 /**
  * case_s - function to handle cstring format
- * @ap: pointer to the variadic list
- * Return: number of characters had been written
+ * @ctx: the printf context object
  */
-int case_s(va_list ap)
+void case_s(context_t *ctx)
 {
-	return (pstr(va_arg(ap, char *)));
+	pstr(ctx, va_arg(ctx->ap, char *));
 }
 
 /**
  * case_rs - function to handle reverse cstring format
- * @ap: pointer to the variadic list
- * Return: number of characters had been written
+ * @ctx: the printf context object
  */
-int case_rs(va_list ap)
+void case_rs(context_t *ctx)
 {
-	int counter;
-	char *s = va_arg(ap, char *);
+	char *s = va_arg(ctx->ap, char *);
 	char *copy = strdup(s);
 
 	if (!copy)
-		return (0);
+		return;
 	strrev(copy, strlen(copy));
-	counter = pstr(copy);
+	pstr(ctx, copy);
 	free(copy);
-	return (counter);
 }
 
 /**
  * case_mod - function to handle mod format
- * @ap: pointer to the variadic list
- * Return: number of characters had been written
+ * @ctx: the printf context object
  */
-int case_mod(va_list ap __attribute__((unused)))
+void case_mod(context_t *ctx)
 {
-	return (pchar('%'));
+	pchar(ctx, '%');
 }
 
 /**
  * case_dec - function to handle decimal numbers formatting
- * @ap: pointer to the variadic list
- * Return: number of characters had been writter
+ * @ctx: the printf context object
  */
-int case_dec(va_list ap)
+void case_dec(context_t *ctx)
 {
-	int sign = 0, value = va_arg(ap, int);
+	int sign = 0, value = va_arg(ctx->ap, int);
 	char str[12];
 
 	if (value < 0)
@@ -68,6 +61,6 @@ int case_dec(va_list ap)
 	}
 
 	if (!number_converter(str + sign, value, 10))
-		return (0);
-	return (pstr(str));
+		return;
+	pstr(ctx, str);
 }
