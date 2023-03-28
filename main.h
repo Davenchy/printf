@@ -31,5 +31,6 @@ int case_upper_hex(va_list);
 int case_lower_hex(va_list);
 int case_address(va_list);
 int case_R13(va_list);
+int case_S(va_list);
 
 #endif
