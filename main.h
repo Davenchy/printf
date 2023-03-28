@@ -9,6 +9,7 @@ typedef struct context_s
 {
 	buffer_t bp;
 	va_list ap;
+	const char *format;
 } context_t;
 typedef struct
 {

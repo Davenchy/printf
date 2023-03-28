@@ -35,6 +35,7 @@ int _printf(const char *format, ...)
 		}
 
 		format++;
+		ctx.format = format;
 		/* print formats */
 		for (i = 0; formats[i].fcase; i++)
 		{
