@@ -1,4 +1,5 @@
 #include "main.h"
+#include <ctype.h>
 #include <stdarg.h>
 
 /**
@@ -51,3 +52,50 @@ int case_R13(va_list ap)
         }
         return (counter);
 }
+
+
+int case_S(va_list ap)
+{
+        int counter = 0;
+        char *str = va_arg(ap, char *); 
+
+        for (; *str; str++)
+        {
+                char str_2[5];
+
+
+                str_2[0] = '\\';
+                str_2[1] = 'x';
+                str_2[2] = '0';
+
+                if (isprint(*str))
+                {
+                        counter += pchar(*str);
+                        continue;
+                }
+                number_converter(str_2 + 3, *str, 16);
+                str_2[3] = toupper(str_2[3]);
+                str_2[4] = toupper(str_2[4]);
+                counter += pstr(str_2);
+        }
+        return (counter);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
