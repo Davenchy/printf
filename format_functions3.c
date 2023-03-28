@@ -21,6 +21,11 @@ int case_address(va_list ap)
 	return (pstr(str));
 }
 
+/**
+* case_R13 - convert normal string to rot13 string
+* @ap: the variadic list pointer
+* Return: number of characters had been printed
+*/
 int case_R13(va_list ap)
 {
         int counter = 0;
