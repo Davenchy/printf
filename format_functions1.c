@@ -55,7 +55,7 @@ void case_dec(context_t *ctx)
 	unsigned long value = va_arg(ctx->ap, unsigned long);
 	char str[22];
 
-	if ((signed)value < 0)
+	if ((signed int)value < 0)
 	{
 		value = -value;
 		str[sign++] = '-';

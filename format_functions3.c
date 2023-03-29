@@ -50,7 +50,7 @@ void case_R13(context_t *ctx)
  */
 void case_S(context_t *ctx)
 {
-	char *str = va_arg(ctx->ap, char *); 
+	char *str = va_arg(ctx->ap, char *);
 
 	if (!str)
 		return;
@@ -77,7 +77,7 @@ void case_S(context_t *ctx)
 			str_2[2] = toupper('0');
 			pstr(ctx, str_2);
 		}
-		else 
+		else
 		{
 			str_2[2] = toupper(str_2[2]);
 			str_2[3] = toupper(str_2[3]);
