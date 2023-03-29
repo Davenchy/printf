@@ -1,4 +1,6 @@
+#include <stdio.h>
 #include "main.h"
+#include "style.h"
 
 /**
  * _printf - simple clone for the printf function
@@ -8,7 +10,6 @@
  */
 int _printf(const char *format, ...)
 {
-	int i;
 	context_t ctx;
 	/* array of format cases and their handling functions */
 	format_t formats[] = {
@@ -20,13 +21,19 @@ int _printf(const char *format, ...)
 	};
 
 	if (!format)
-		return (-1);
+		goto end;
 	ctx.bp = buffer_start(BUFFER_SIZE);
 	if (!ctx.bp)
-		return (-1);
+		goto end;
+	ctx.sp = style_create();
+	if (!ctx.sp)
+		goto end_buffer;
+
 	va_start(ctx.ap, format);
 	for (; *format; format++)
 	{
+		format_t *style_format;
+
 		/* print ordinary characters */
 		if (*format != '%')
 		{
@@ -36,15 +43,19 @@ int _printf(const char *format, ...)
 
 		format++;
 		ctx.format = format;
-		/* print formats */
-		for (i = 0; formats[i].fcase; i++)
-		{
-			/* detect the format case */
-			if (formats[i].fcase == *format)
-				/* execute the format handling function */
-				formats[i].fun(&ctx);
-		}
+		style_reset(ctx.sp);
+		style_format = style_detect(formats, format, ctx.sp);
+		if (!style_format)
+			continue;
+		style_format->fun(&ctx);
+		format += ctx.sp->size;
 	}
+
+	style_destroy(ctx.sp);
 	va_end(ctx.ap);
 	return (buffer_end(ctx.bp));
+end_buffer:
+	buffer_end(ctx.bp);
+end:
+	return (-1);
 }

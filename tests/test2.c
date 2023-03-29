@@ -16,5 +16,8 @@ int main() {
 		_printf("length: %d\n", r);
 		_printf("\n");
 		_printf("%d, %d, %i, %i\n", INT_MAX, INT_MIN, INT_MAX, INT_MIN);
+		_printf("bytes: %u\n", 1812345678912345678);
+		_printf("bytes: %lu\n", 1812345678912345678);
+		_printf("bytes: %hu\n", 1812345678912345678);
 		return 0;
 }

@@ -1,21 +1,6 @@
 #ifndef _MAIN_H_
 #define _MAIN_H_
-
-#include <stdarg.h>
-#include "buffer.h"
-
-/* type definitions */
-typedef struct context_s
-{
-	buffer_t bp;
-	va_list ap;
-	const char *format;
-} context_t;
-typedef struct
-{
-	char fcase;
-	void (*fun)(context_t *ctx);
-} format_t;
+#include "types.h"
 
 /* main and util functions */
 int _printf(const char *format, ...);

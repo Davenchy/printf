@@ -21,8 +21,13 @@ void case_bin(context_t *ctx)
  */
 void case_unsigned(context_t *ctx)
 {
-	unsigned int value = va_arg(ctx->ap, unsigned int);
-	char str[11];
+	unsigned long int value = va_arg(ctx->ap, unsigned long int);
+	char str[23];
+
+	if (ctx->sp->isshort)
+		value = (unsigned short) value;
+	else if (!ctx->sp->islong)
+		value = (unsigned int) value;
 
 	if (number_converter(str, value, 10))
 		pstr(ctx, str);
