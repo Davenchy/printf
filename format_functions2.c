@@ -7,9 +7,13 @@
  */
 void case_bin(context_t *ctx)
 {
-	unsigned int value = va_arg(ctx->ap, unsigned int);
-	char str[35];
+	unsigned long value = va_arg(ctx->ap, unsigned long);
+	char str[66];
 
+	if (ctx->sp->isshort)
+		value = (unsigned short) value;
+	else if (!ctx->sp->islong)
+		value = (unsigned int) value;
 	if (number_converter(str, value, 2))
 		pstr(ctx, str);
 
@@ -21,14 +25,13 @@ void case_bin(context_t *ctx)
  */
 void case_unsigned(context_t *ctx)
 {
-	unsigned long int value = va_arg(ctx->ap, unsigned long int);
-	char str[23];
+	unsigned long value = va_arg(ctx->ap, unsigned long);
+	char str[22];
 
 	if (ctx->sp->isshort)
 		value = (unsigned short) value;
 	else if (!ctx->sp->islong)
 		value = (unsigned int) value;
-
 	if (number_converter(str, value, 10))
 		pstr(ctx, str);
 }
@@ -39,9 +42,13 @@ void case_unsigned(context_t *ctx)
  */
 void case_octal(context_t *ctx)
 {
-	unsigned int value = va_arg(ctx->ap, unsigned int);
-	char str[12];
+	unsigned long value = va_arg(ctx->ap, unsigned long);
+	char str[23];
 
+	if (ctx->sp->isshort)
+		value = (unsigned short) value;
+	else if (!ctx->sp->islong)
+		value = (unsigned int) value;
 	if (number_converter(str, value, 8))
 		pstr(ctx, str);
 }
@@ -52,9 +59,13 @@ void case_octal(context_t *ctx)
  */
 void case_lower_hex(context_t *ctx)
 {
-	unsigned int value = va_arg(ctx->ap, unsigned int);
-	char str[10];
+	unsigned long value = va_arg(ctx->ap, unsigned long);
+	char str[18];
 
+	if (ctx->sp->isshort)
+		value = (unsigned short) value;
+	else if (!ctx->sp->islong)
+		value = (unsigned int) value;
 	if (number_converter(str, value, 16))
 		pstr(ctx, str);
 }
@@ -65,9 +76,13 @@ void case_lower_hex(context_t *ctx)
  */
 void case_upper_hex(context_t *ctx)
 {
-	unsigned int i, value = va_arg(ctx->ap, unsigned int);
-	char str[10];
+	unsigned long i, value = va_arg(ctx->ap, unsigned long);
+	char str[18];
 
+	if (ctx->sp->isshort)
+		value = (unsigned short) value;
+	else if (!ctx->sp->islong)
+		value = (unsigned int) value;
 	if (number_converter(str, value, 16))
 	{
 		for (i = 0; str[i]; i++)

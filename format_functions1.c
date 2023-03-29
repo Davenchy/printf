@@ -52,8 +52,8 @@ void case_mod(context_t *ctx)
 void case_dec(context_t *ctx)
 {
 	int sign = 0;
-	unsigned int value = va_arg(ctx->ap, unsigned int);
-	char str[12];
+	unsigned long value = va_arg(ctx->ap, unsigned long);
+	char str[22];
 
 	if ((signed)value < 0)
 	{
@@ -61,6 +61,10 @@ void case_dec(context_t *ctx)
 		str[sign++] = '-';
 	}
 
+	if (ctx->sp->isshort)
+		value = (unsigned short) value;
+	else if (!ctx->sp->islong)
+		value = (unsigned int) value;
 	if (!number_converter(str + sign, value, 10))
 		return;
 	pstr(ctx, str);
